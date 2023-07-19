@@ -1,0 +1,24 @@
+< THE SYMBOL TABLE >  Project.com  --  emu8086 assembler version: 4.07 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+WELCOMEMESSAGE           	00103     	1         	VAR       	(NOSEG)   
+INPUTMESSAGE             	00149     	1         	VAR       	(NOSEG)   
+RESULTMESSAGE            	00183     	1         	VAR       	(NOSEG)   
+CONTINUEMESSAGE          	0019B     	1         	VAR       	(NOSEG)   
+BYEMESSAGE               	001BC     	1         	VAR       	(NOSEG)   
+LINEMESSAGE              	001CE     	1         	VAR       	(NOSEG)   
+CODE                     	00208     	-1        	LABEL     	(NOSEG)   
+MAIN                     	00217     	-1        	LABEL     	(NOSEG)   
+ASK                      	00283     	-1        	LABEL     	(NOSEG)   
+TRYAGAIN                 	002A1     	-1        	LABEL     	(NOSEG)   
+END                      	002A7     	-1        	LABEL     	(NOSEG)   
+NEWLINE                  	002B4     	-1        	LABEL     	(NOSEG)   
+GETSTRING                	002C1     	-1        	LABEL     	(NOSEG)   
+DONE                     	002D4     	-1        	LABEL     	(NOSEG)   
+OVERFLOW                 	002D9     	-1        	LABEL     	(NOSEG)   
+BORDER                   	002DD     	-1        	LABEL     	(NOSEG)   
+===================================================================================================
+[ 19/07/2023  --  04:45:45 ?.? ] 
+< END >
+ 

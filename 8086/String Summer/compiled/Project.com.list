@@ -1,0 +1,159 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+Project.com -- emu8086 assembler version: 4.07  
+ 
+[ 19/07/2023  --  04:45:45 ?.? ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       org 100h
+[   2]    0100: E9 05 01                              .DATA ;data segment
+[   3]    0103: 57 65 6C 63 6F 6D 65 20 74 6F 20 53   welcomeMessage db "Welcome to Sadra Yavarzadeh Herisi & Zahra Rostami's Assembly project$"
+                61 64 72 61 20 59 61 76 61 72 7A 61 
+                64 65 68 20 48 65 72 69 73 69 20 26 
+                20 5A 61 68 72 61 20 52 6F 73 74 61 
+                6D 69 27 73 20 41 73 73 65 6D 62 6C 
+                79 20 70 72 6F 6A 65 63 74 24       
+[   4]    0149: 54 79 70 65 20 79 6F 75 72 20 64 65   inputMessage   db "Type your desired text and press ENTER (Length <= 255):  $"
+                73 69 72 65 64 20 74 65 78 74 20 61 
+                6E 64 20 70 72 65 73 73 20 45 4E 54 
+                45 52 20 28 4C 65 6E 67 74 68 20 3C 
+                3D 20 32 35 35 29 3A 20 20 24       
+[   5]    0183: 53 75 6D 20 6F 66 20 74 68 65 20 74   resultMessage   db "Sum of the texts are:  $"
+                65 78 74 73 20 61 72 65 3A 20 20 24 
+                                                    
+[   6]    019B: 44 6F 20 79 6F 75 20 77 61 6E 74 20   continueMessage   db "Do you want to continue? (y/n)  $"
+                74 6F 20 63 6F 6E 74 69 6E 75 65 3F 
+                20 28 79 2F 6E 29 20 20 24          
+[   7]    01BC: 48 61 76 65 20 61 20 67 6F 6F 64 20   byeMessage   db "Have a good luck.$"
+                6C 75 63 6B 2E 24                   
+[   8]    01CE: 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D   lineMessage db "---------------------------------------------------------$"
+                2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 
+                2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 
+                2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 
+                2D 2D 2D 2D 2D 2D 2D 2D 2D 24       
+[   9]        :                                       
+[  10]    0208:                                       .CODE
+[  11]        :                                       ;###################################################################  Macro
+[  12]        :                                       pointerPrint macro pointer          ; chap reshteyi ke dar "pointer" bude va ba & tamam shode ast
+[  13]        :                                       mov dx, pointer
+[  14]        :                                       mov ah, 9
+[  15]        :                                       int 21h
+[  16]        :                                       endm
+[  17]        :                                       
+[  18]        :                                       stringPrint macro string            ; chap reshteye "string" ke dar axare an & mibashad
+[  19]        :                                       lea dx, string
+[  20]        :                                       pointerPrint dx
+[  21]        :                                       endm
+[  22]        :                                       
+[  23]        :                                       getInput macro dest, maxLength      ; modiriate input
+[  24]        :                                       stringPrint inputMessage
+[  25]        :                                       
+[  26]        :                                       mov cx,dest                     ; dest --> di
+[  27]        :                                       mov di,cx
+[  28]        :                                       
+[  29]        :                                       mov cx,maxLength
+[  30]        :                                       
+[  31]        :                                       call getString
+[  32]        :                                       call newLine
+[  33]        :                                       endm
+[  34]        :                                       
+[  35]        :                                       ;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main code
+[  36]        :                                       
+[  37]    0208: BA 03 01 8B D2 B4 09 CD 21            stringPrint welcomeMessage                  ; chap xoshamad va name aaza
+[  38]    0211: E8 A0 00                              call newLine
+[  39]    0214: E8 9D 00                              call newLine
+[  40]        :                                       
+[  41]    0217:                                       main:
+[  42]    0217: BA 49 01 8B D2 B4 09 CD 21 B9 00 0D   getInput 0d00h, 10                      ; tebge macro getInput
+                8B F9 B9 0A 00 E8 96 00 E8 86 00    
+[  43]    022E: BA 49 01 8B D2 B4 09 CD 21 B9 00 0E   getInput 0e00h, 255                     ; yek vurudi ba maximum tule 255 begir
+                8B F9 B9 FF 00 E8 7F 00 E8 6F 00    
+[  44]    0245: BA 49 01 8B D2 B4 09 CD 21 B9 00 0F   getInput 0f00h, 255                     ; va dar address gofte shode zaxire kon
+                8B F9 B9 FF 00 E8 68 00 E8 58 00    
+[  45]        :                                       
+[  46]    025C: E8 55 00                              call newLine
+[  47]        :                                       
+[  48]    025F: BA 83 01 8B D2 B4 09 CD 21            stringPrint resultMessage
+[  49]    0268: BA 00 0D B4 09 CD 21                  pointerPrint 0d00h                      ; reshte nojud dar 0d00h ra chap kon
+[  50]    026F: BA 00 0E B4 09 CD 21                  pointerPrint 0e00h
+[  51]    0276: BA 00 0F B4 09 CD 21                  pointerPrint 0f00h
+[  52]        :                                       
+[  53]    027D: E8 34 00                              call newLine
+[  54]    0280: E8 31 00                              call newLine
+[  55]        :                                       
+[  56]    0283:                                       ask:                                    ; porsesh baraye edame
+[  57]    0283: BA 9B 01 8B D2 B4 09 CD 21            stringPrint continueMessage
+[  58]    028C: B4 01                                 mov ah,1                            ; gereftan yek harf
+[  59]    028E: CD 21                                 int 21h
+[  60]    0290: 8A D8                                 mov bl, al                          ; chon dasture zir(69) AL ra taqir midahad anra dar BL zaxire kardim
+[  61]    0292: E8 1F 00                              call newLine
+[  62]        :                                       
+[  63]    0295: 80 FB 79                              cmp bl,79h                              ; agar vurudi "y" bud "tryAgain" ro ejra kon
+[  64]    0298: 74 07                                 je tryAgain
+[  65]    029A: 80 FB 6E                              cmp bl,6eh
+[  66]    029D: 74 08                                 je end                                  ; agar vurudi "n" bud "end" ro ejra kon
+[  67]    029F: 75 E2                                 jne ask                                 ; agar vurudi na "n" bud va na "y" anagah "ask" ro ejra kon
+[  68]        :                                       
+[  69]    02A1:                                       tryAgain:
+[  70]    02A1: E8 39 00                              call border
+[  71]    02A4: E9 70 FF                              jmp main
+[  72]        :                                       
+[  73]    02A7:                                       end:
+[  74]    02A7: E8 33 00                              call border
+[  75]    02AA: BA BC 01 8B D2 B4 09 CD 21            stringPrint byeMessage
+[  76]    02B3: C3                                    ret
+[  77]        :                                       
+[  78]        :                                       ;$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Functions
+[  79]        :                                       
+[  80]    02B4:                                       newLine:            ; function baraye harekat be xatte jadid
+[  81]    02B4: B4 02                                 mov ah, 02h
+[  82]        :                                       
+[  83]    02B6: BA 0A 00                              mov dx, 10      ; raftan be satre badi
+[  84]    02B9: CD 21                                 int 21h
+[  85]        :                                       
+[  86]    02BB: BA 0D 00                              mov dx, 13      ; raftan be avale satr
+[  87]    02BE: CD 21                                 int 21h
+[  88]    02C0: C3                                    ret
+[  89]        :                                       
+[  90]    02C1:                                       getString:                  ; tabeyi ke vurudi ra gerefte va dar axar an $ qarar midahad
+[  91]    02C1: B4 01                                 mov ah,1                ; vurudi ro gerefte va dar dar AL beriz
+[  92]    02C3: CD 21                                 int 21h
+[  93]        :                                       
+[  94]    02C5: 88 05                                 mov [di],al             ; AL ro be mahale DI beriz
+[  95]        :                                       
+[  96]    02C7: 47                                    inc di                  ; mahale zaxiresazi yedune jelo
+[  97]    02C8: 49                                    dec cx                  ; tule estefade shode yedune kam
+[  98]        :                                       
+[  99]    02C9: 83 F9 00                              cmp cx,0
+[ 100]    02CC: 74 0B                                 je overflow             ; sharte1: agar tul=255 bepar be "overflow"
+[ 101]        :                                       
+[ 102]    02CE: 3C 0D                                 cmp al, 0dh
+[ 103]    02D0: 74 02                                 je done                 ; sharte 2: agar vurudi=ENTER bud bepar be "done"
+[ 104]        :                                       
+[ 105]    02D2: EB ED                                 jmp getString           ; agar hich kodam az shartha barqarar nabud: dobare vurudi begir
+[ 106]        :                                       
+[ 107]    02D4:                                       done:
+[ 108]    02D4: C6 45 FF 24                           mov [di-1], '$'     ; be axare string $ ezafe kon
+[ 109]    02D8: C3                                    ret
+[ 110]    02D9:                                       overFlow:
+[ 111]    02D9: C6 05 24                              mov [di], '$'       ; be axare string $ ezafe kon
+[ 112]    02DC: C3                                    ret
+[ 113]        :                                       
+[ 114]    02DD:                                       border:                     ; yek xat dar terminal bekesh
+[ 115]    02DD: E8 D4 FF                              call newLine
+[ 116]    02E0: BA CE 01 8B D2 B4 09 CD 21            stringPrint lineMessage
+[ 117]    02E9: E8 C8 FF                              call newLine
+[ 118]    02EC: E8 C5 FF                              call newLine
+[ 119]    02EF: C3                                    ret
+[ 120]        :                                       
+ 
+===================================================================================================
+ 
+
+
+
+
+===================================================================================================

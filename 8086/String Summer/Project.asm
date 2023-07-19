@@ -1,6 +1,6 @@
 org 100h
 .DATA ;data segment          
-welcomeMessage db "Welcome to Sadra Yavarzadeh Herisi & Zahra Rostami's Assembly project$"
+welcomeMessage db "Welcome to Sadra Yavarzadeh Herisi's 8086 Assembly project$"
 inputMessage   db "Type your desired text and press ENTER (Length <= 255):  $"
 resultMessage   db "Sum of the texts are:  $"
 continueMessage   db "Do you want to continue? (y/n)  $" 
